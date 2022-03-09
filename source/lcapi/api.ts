@@ -1,0 +1,14 @@
+import { Leetcode } from "@codingsnack/leetcode-api";
+import { Problem } from "@codingsnack/leetcode-api/lib/problem";
+
+const CSRF = "zEHiNJM8wabvesOj6K6u4Qdn1X2p4fwXvKcPWGpcZMLP898zsgJaYhgSq63FoxZ6";
+const LEETCODE_SESSION =
+	"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfYXV0aF91c2VyX2lkIjoiNTc1OTUyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiYWxsYXV0aC5hY2NvdW50LmF1dGhfYmFja2VuZHMuQXV0aGVudGljYXRpb25CYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiYTc2MzgwMGFiYTgwYjU1MmE5MWExYTVlMTFmZGQxM2ZhMDE1Nzc4NCIsImlkIjo1NzU5NTIsImVtYWlsIjoicmFnaHV2ZWVybmFyYWhhcmlzZXR0aUBnbWFpbC5jb20iLCJ1c2VybmFtZSI6Im5hcmFoYXJpc2V0dGkiLCJ1c2VyX3NsdWciOiJuYXJhaGFyaXNldHRpIiwiYXZhdGFyIjoiaHR0cHM6Ly9hc3NldHMubGVldGNvZGUuY29tL3VzZXJzL25hcmFoYXJpc2V0dGkvYXZhdGFyXzE1NTQ3MjU1MjUucG5nIiwicmVmcmVzaGVkX2F0IjoxNjQ2ODA2Mjg5LCJpcCI6IjI2MDM6NjAwMDpiMzAwOjFkNjU6OTRiMTpjMzM3OmMyZTU6MWJjIiwiaWRlbnRpdHkiOiI2YjY5M2QwMDVkOWNiZmMwNzg1MDZkMzQxM2Y5M2U4ZCIsInNlc3Npb25faWQiOjE4Njg1MjY5fQ.EJ8FK97qPDfJ92FMsCwyLNlazZX-EdVvUE2jkhHokyE";
+
+async function getProblem(slug: string): Promise<Problem> {
+	const client = new Leetcode({ csrfToken: CSRF, session: LEETCODE_SESSION });
+	const problem = await client.getProblem(slug);
+	return problem;
+}
+
+export default getProblem;

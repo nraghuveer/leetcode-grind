@@ -1,17 +1,18 @@
-import React, { useState, useEffect, FC } from "react";
+import React, { useState, useEffect, FC, useCallback } from "react";
+import getProblem from "./lcapi/api";
 import { Text } from "ink";
 
-const Counter: FC = () => {
-	const [counter, setCounter] = useState(0);
-
-	useEffect(() => {
-		const timer = setInterval(() => {
-			setCounter((prevValue) => prevValue + 1);
-		}, 100);
-		return () => clearInterval(timer);
+const ShowNote: FC = () => {
+	const [message, setMessage] = useState("loading...");
+	const fetchProblem = useCallback(async (slug: string) => {
+		await getProblem(slug)
+			.then((r) => setMessage(r.title))
+			.catch((error) => setMessage("Error " + error));
 	}, []);
-
-	return <Text color="green">{counter} tests passed!</Text>;
+	useEffect(() => {
+		fetchProblem("two-sum");
+	}, [fetchProblem]);
+	return <Text color="green">{message}</Text>;
 };
 
 const App: FC<{ name?: string }> = ({ name = "Stranger" }) => (
@@ -19,7 +20,7 @@ const App: FC<{ name?: string }> = ({ name = "Stranger" }) => (
 		<Text>
 			Hola, <Text color="green">{name}</Text>
 		</Text>
-		<Counter></Counter>
+		<ShowNote />
 	</>
 );
 

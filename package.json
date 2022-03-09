@@ -16,6 +16,8 @@
 		"dist/cli.js"
 	],
 	"dependencies": {
+		"@codingsnack/leetcode-api": "^0.0.2",
+		"@urql/core": "^2.4.3",
 		"ink": "^3.2.0",
 		"meow": "^9.0.0",
 		"react": "^17.0.2"
